@@ -28,14 +28,14 @@ describe("Simple_storage_testing", function(){
 
   })
   
-  it.only("sum should be added correctly", async function(){
+  it("sum should be added correctly", async function(){
 
     const newNum = "4";
     const sumFunc_1 = await simpleStorageDep.sumStor(newNum);
     await sumFunc_1.wait(1);
     const newVal = await simpleStorageDep.retrieve(); 
     assert.equal(newVal.toString(), newNum);
-    
+
 
 
 
