@@ -21,7 +21,7 @@ contract Storage {
     function sumStor(uint256 _adder) public {
         number+=_adder;
     }
-    function fund(uint256) public payable{
+    function fund() public payable{
   
     }       
 }
