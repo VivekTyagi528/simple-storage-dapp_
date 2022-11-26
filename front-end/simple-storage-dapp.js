@@ -37,11 +37,26 @@ fundBtnSel.addEventListener("click",async ()=>{
         const contract = new ethers.Contract(contractAddress,abi,signer);
         console.log("signer has been acceptedd!!!")
         console.log((ethAmtSel.value));
-
-        const transact = await contract.fund({value:ethers.utils.parseEther(amt),});
+     try {
+       const transact = await contract.fund({value:ethers.utils.parseEther(amt),});
+       console.log("Transaction successfull");
+       await listenForTxn(transactionResponse,provider);
+      
+     } catch (error) {
+      console.log(`You caught into an error ${error}`);
+     }
     }
     else{
         alert("You can't leave the Eth Field empty")
         console.log("You can't leave the Eth Field empty")      
     }
 })
+
+//Listener
+function listenForTxn(transactionResponse, provider) {
+ console.log(`Mining for the ${transactionResponse.hash}...`);
+ //Here wait for the txn to be mined...
+ provider.once(transactionResponse.hash,(transactionReceipt)=>{
+ console.log(`Fulfilled with ${transactionReceipt} confirmations...`)
+ })
+}
